@@ -1,0 +1,12 @@
+* Documentation (Sphinx?)
+* Technical
+** Redo color with a class
+
+* Rules
+** Implement each gameplay state
+
+* AI
+** Levenstein on points?
+** http://www.stanford.edu/class/cs229/proj2009/Loh.pdf
+
+* Find a way to generate a standalone
