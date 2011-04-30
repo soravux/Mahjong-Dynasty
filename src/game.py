@@ -104,23 +104,22 @@ class mahjong_board(object):
     
     def get_next_mur_gfx_position(self):
         global DISPLAY_WIDTH, DISPLAY_HEIGHT, TILE_WIDTH, TILE_HEIGHT
-        wdt_bnd_rto = 0.55 # Tile Width Bounding Ratio
+        wdt_bnd_rto = 0.85 # Tile Width Bounding Ratio
         while True:
             for x in range(int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2), int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2), int(-TILE_WIDTH*wdt_bnd_rto)):
-                for y in range(int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(17))/2), int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(17))/2 + 8), 6):
+                for y in range(int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*15)/2), int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*15)/2 + 8), 6):
                     yield x, y, 0
-            for y in range(int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(16))/2), int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(16))/2 ), int(-TILE_WIDTH*wdt_bnd_rto)):
+            for y in range(int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2), int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2 ), int(-TILE_WIDTH*wdt_bnd_rto)):
                 for x in range(int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*17)/2) - (TILE_HEIGHT/2), int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*17)/2) - (TILE_HEIGHT/2) - 8, -6):
                     yield x, y, 270
             for x in range(int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2), int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2), int(TILE_WIDTH*wdt_bnd_rto)):
-                for y in range(int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(17))/2), int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(17))/2 + 8), 6):
+                for y in range(int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2), int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2 + 8), 6):
                     yield x, y, 0
-            for y in range(int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(16))/2), int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(16))/2 ), int(TILE_WIDTH*wdt_bnd_rto)):
+            for y in range(int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2), int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2 ), int(TILE_WIDTH*wdt_bnd_rto)):
                 for x in range(int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*17)/2) + (TILE_HEIGHT/2), int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*17)/2) + (TILE_HEIGHT/2) + 8, 6):
                     yield x, y, 270
     
     def refresh_mur_gfx(self):
-        
         """
         Actualise les sprites affichant le mur
         """
@@ -131,29 +130,29 @@ class mahjong_board(object):
             tile.rect.x = x
             tile.rect.y = y
             
-    
     def refresh_player_gfx(self, player=0):
         """
-        Actualise les sprites affichant le mur
+        Actualise les sprites affichant les mains des joueurs
         """
-        wdt_bnd_rto = 1.0 # Tile Width Bounding Ratio
+        wdt_bnd_rto = 0.85 # Tile Width Bounding Ratio
+        hand_bnd_rto = 1.0
         global DISPLAY_WIDTH, DISPLAY_HEIGHT, TILE_WIDTH, TILE_HEIGHT
         for num, tile in enumerate(self.player[player]):
             if player == 0:
-                tile.rect.x = int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*13)/2) + (TILE_WIDTH*wdt_bnd_rto*num)
-                tile.rect.y = int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(17))/2) + TILE_WIDTH/2
+                tile.rect.x = int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2) + (TILE_WIDTH*hand_bnd_rto*num)
+                tile.rect.y = int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*18)/2) + TILE_WIDTH/2
                 tile.set_angle(0)
             elif player == 1:
-                tile.rect.x = int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*17)/2) - (TILE_HEIGHT/2) - TILE_HEIGHT
-                tile.rect.y = int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(13))/2) + (TILE_WIDTH*wdt_bnd_rto*num)
+                tile.rect.x = int(DISPLAY_WIDTH/2 - (TILE_WIDTH*wdt_bnd_rto*18)/2) - (TILE_HEIGHT/2) - TILE_HEIGHT
+                tile.rect.y = int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*16)/2) + (TILE_WIDTH*hand_bnd_rto*num)
                 tile.set_angle(90)
             elif player == 2:
-                tile.rect.x = int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*13)/2) - (TILE_WIDTH*wdt_bnd_rto*num)
-                tile.rect.y = int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*(17))/2) - TILE_WIDTH/2
+                tile.rect.x = int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2) - (TILE_WIDTH*hand_bnd_rto*num)
+                tile.rect.y = int(DISPLAY_HEIGHT/2 - (TILE_WIDTH*wdt_bnd_rto*18)/2) - TILE_WIDTH/2
                 tile.set_angle(180)
             else:
-                tile.rect.x = int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*17)/2) + (TILE_HEIGHT/2) - TILE_HEIGHT
-                tile.rect.y = int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*(13))/2) - (TILE_WIDTH*wdt_bnd_rto*num)
+                tile.rect.x = int(DISPLAY_WIDTH/2 + (TILE_WIDTH*wdt_bnd_rto*20)/2) + (TILE_HEIGHT/2) - TILE_HEIGHT
+                tile.rect.y = int(DISPLAY_HEIGHT/2 + (TILE_WIDTH*wdt_bnd_rto*16)/2) - (TILE_WIDTH*hand_bnd_rto*num)
                 tile.set_angle(270)
     
     def reorder_player_hand(self, player=0):
@@ -177,7 +176,9 @@ class mahjong_board(object):
             
             
     def next_step(self):
-    
+        """
+        Statemachine représentant l'état du jeu actuel
+        """
         if self.game_state == "piocher":
             self.pioche(self.player_actuel)
             self.game_state = "waiting_action"

@@ -1,9 +1,12 @@
 * Documentation (Sphinx?)
+
 * Technical
 ** Redo color with a class
+** Correct globals declarations
 
 * Rules
 ** Implement each gameplay state
+** Start taking tiles on the correct side of the wall and generate dead wall
 
 * AI
 ** Levenstein on points?
