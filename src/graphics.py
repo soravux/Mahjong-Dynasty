@@ -45,4 +45,14 @@ class graphic_system(object):
         for text in self.all_text:
             self.screen.blit(text.get_rendering(), text.get_position())
 
-
+            
+class mouse_cursor_underlay(pygame.sprite.Sprite):
+    def __init__(self):
+        # Call the parent class (Sprite) constructor
+        pygame.sprite.Sprite.__init__(self) 
+        
+        self.image = pygame.Surface([1, 1])
+        self.image.fill(white)
+        self.image.set_colorkey(white)
+        
+        self.rect = self.image.get_rect()

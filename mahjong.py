@@ -18,6 +18,9 @@ if __name__ == '__main__':
         jeu_mahjong.refresh_player_gfx(player)
     jeu_mahjong.refresh_mur_gfx()
     
+    # Mouse handling
+    mouse_underlay = mouse_cursor_underlay()
+    
     # Framerate handling
     clock = pygame.time.Clock()
     
@@ -28,8 +31,10 @@ if __name__ == '__main__':
                 done = True
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    for a in graphics.all_sprites:
-                        print(a.clickCheck(event.pos))
+                    mouse_underlay.rect.x = event.pos[0]
+                    mouse_underlay.rect.y = event.pos[1]
+                    selected_sprites = pygame.sprite.spritecollide(mouse_underlay, graphics.all_sprites, False)
+                    # TODO: Do something with the click tiles
         
         # Game handling
         jeu_mahjong.next_step()
